@@ -4,11 +4,19 @@ import Models.Cuenta;
 import java.util.ArrayList;
 
 public class CuentaService {
-
-    private ArrayList<Cuenta> cuentas;
+    private static ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     public Cuenta getCuenta(Integer identificacion){
-        var cuentaStream = cuentas.stream().filter(cuenta -> cuenta.getDniTitular() == identificacion).findFirst().get();
-        return cuentaStream;
+        for (Cuenta c:cuentas) {
+            if (c.getDniTitular().equals(identificacion)){
+                return c;
+            }
+        }
+        System.out.println("no coincide la identificancion");
+        return null;
+    }
+    public static void agregarCuentas(Cuenta cuenta){
+        cuentas.add(cuenta);
+        System.out.println(cuentas.size());
     }
 }
